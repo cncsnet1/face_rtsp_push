@@ -19,6 +19,8 @@ namespace screen_window
 {
     public partial class Form1 : Form
     {
+        private Process crimAlertProcess = null;
+
         private bool isCapturing = false;
         private bool isStreaming = false;
         private bool isSelectingRegion = false;
@@ -54,8 +56,38 @@ namespace screen_window
             // 初始化图标
             normalIcon = SystemIcons.Shield;
             recordingIcon = CreateRecordingIcon();
-        }
+            ManageCrimAlertProcess();
 
+        }
+        private void ManageCrimAlertProcess()
+        {
+            // 结束现有crim_alert进程
+            foreach (var proc in Process.GetProcessesByName("crim_alert"))
+            {
+                try
+                {
+                    proc.Kill();
+                    proc.WaitForExit();
+                }
+                catch { }
+            }
+
+            // 启动新实例（假设路径）
+            string crimAlertPath = Path.Combine(Application.StartupPath, "crim_alert.exe");
+            if (File.Exists(crimAlertPath))
+            {
+                crimAlertProcess = new Process();
+                crimAlertProcess.StartInfo.FileName = crimAlertPath;
+                crimAlertProcess.StartInfo.UseShellExecute = true;
+                crimAlertProcess.Start();
+            }
+            else
+            {
+              
+                MessageBox.Show("找不到 crim_alert.exe，请检查路径。");
+                Process.GetCurrentProcess().Kill();
+            }
+        }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // 停止录制
@@ -73,30 +105,18 @@ namespace screen_window
             
             // 清理悬浮边框
             HideFloatingBorder();
-        }
-
-        private void btnToggleCapture_Click(object sender, EventArgs e)
-        {
-            if (!isCapturing)
+            if (crimAlertProcess != null && !crimAlertProcess.HasExited)
             {
-                StartScreenCapture();
-                btnToggleCapture.Text = "停止抓取";
-                btnToggleCapture.BackColor = Color.FromArgb(231, 76, 60);
-                btnToggleStream.Enabled = true;
-            }
-            else
-            {
-                StopScreenCapture();
-                btnToggleCapture.Text = "开始抓取";
-                btnToggleCapture.BackColor = Color.FromArgb(39, 174, 96);
-                if (isStreaming)
+                try
                 {
-                    StopStreaming();
+                    crimAlertProcess.Kill();
+                    crimAlertProcess.WaitForExit();
                 }
-                btnToggleStream.Enabled = false;
+                catch { }
             }
         }
 
+       
         private void btnSelectRegion_Click(object sender, EventArgs e)
         {
             if (!isCapturing && !isStreaming)
@@ -124,14 +144,18 @@ namespace screen_window
 
         private void btnToggleStream_Click(object sender, EventArgs e)
         {
-            if (!isStreaming && isCapturing)
+          
+            if (!isStreaming )
             {
+
+                StartScreenCapture();
                 StartStreaming();
                 btnToggleStream.Text = "停止推流";
                 btnToggleStream.BackColor = Color.FromArgb(39, 174, 96);
             }
             else if (isStreaming)
             {
+                StopScreenCapture();
                 StopStreaming();
                 btnToggleStream.Text = "开始推流";
                 btnToggleStream.BackColor = Color.FromArgb(231, 76, 60);
@@ -298,9 +322,10 @@ namespace screen_window
 
         private void StreamLoop(CancellationToken cancellationToken)
         {
-            const int MAX_RECONNECT_ATTEMPTS = 10;  // 最大重连次数
-            const int RECONNECT_INTERVAL_MS = 3000; // 重连间隔(毫秒)
-
+            int reconnectDelay = 1000; // 初始重连延迟(毫秒)
+            const int MAX_DELAY = 30000; // 最大延迟30秒
+            const int DELAY_MULTIPLIER = 2; // 延迟倍增因子
+        
             while (!cancellationToken.IsCancellationRequested && isCapturing)
             {
                 Process? ffmpegProcess = null;
@@ -491,30 +516,18 @@ namespace screen_window
                     }
                 }
 
-                // 重连逻辑
+                // 无限重连逻辑 with 指数退避
                 if (isCapturing && !cancellationToken.IsCancellationRequested)
                 {
-                    reconnectAttempts++;
-                    
-                    if (reconnectAttempts <= MAX_RECONNECT_ATTEMPTS)
+                    Debug.WriteLine($"推流断开，正在等待 {reconnectDelay/1000} 秒后重连...");
+                    this.Invoke((System.Windows.Forms.MethodInvoker)delegate
                     {
-                        Debug.WriteLine($"推流断开，尝试第 {reconnectAttempts} 次重连...");
-                        this.Invoke((System.Windows.Forms.MethodInvoker)delegate
-                        {
-                            toolStripStatusLabel1.Text = $"推流断开，尝试重连 ({reconnectAttempts}/{MAX_RECONNECT_ATTEMPTS})...";
-                        });
-                        Thread.Sleep(RECONNECT_INTERVAL_MS);
-                    }
-                    else
-                    {
-                        Debug.WriteLine("重连失败，已停止推流");
-                        this.Invoke((System.Windows.Forms.MethodInvoker)delegate
-                        {
-                            toolStripStatusLabel1.Text = "重连失败，已停止推流";
-                            MessageBox.Show("尝试重连多次失败，请检查网络连接后重试", "重连失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            StopStreaming();
-                        });
-                    }
+                        toolStripStatusLabel1.Text = $"推流断开，等待 {reconnectDelay/1000}s 后重连...";
+                    });
+                    Thread.Sleep(reconnectDelay);
+                
+                    // 增加延迟以优化资源
+                    reconnectDelay = Math.Min(reconnectDelay * DELAY_MULTIPLIER, MAX_DELAY);
                 }
             }
         }
@@ -789,7 +802,7 @@ namespace screen_window
         private void FloatingBorder_StartStopClicked(object sender, EventArgs e)
         {
             // 触发主窗口的录制开关
-            btnToggleCapture_Click(sender, e);
+            btnToggleStream_Click(sender, e);
         }
 
         private void FloatingBorder_MinimizeClicked(object sender, EventArgs e)
@@ -902,5 +915,6 @@ namespace screen_window
                 }
             }
         }
+       
     }
 }
