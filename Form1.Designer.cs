@@ -10,8 +10,6 @@ namespace screen_window
         private System.Windows.Forms.Button btnFullScreen;
         private System.Windows.Forms.Button btnToggleStream;
         private System.Windows.Forms.Panel pnlPreview;
-        private System.Windows.Forms.TextBox txtStreamUrl;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.NotifyIcon notifyIcon;
@@ -51,36 +49,21 @@ namespace screen_window
             toolPanel = new Panel();
             policeLabel = new Label();
             buttonPanel = new FlowLayoutPanel();
-            separator1 = new Panel();
             btnSelectRegion = new Button();
-            separator2 = new Panel();
             btnFullScreen = new Button();
-            separator3 = new Panel();
             streamUrlPanel = new Panel();
-            label1 = new Label();
-            txtStreamUrl = new TextBox();
-            separator4 = new Panel();
             btnToggleStream = new Button();
             policeLogo = new PictureBox();
-            controlPanel = new Panel();
-            controlPanelTitle = new Label();
-            statusLabel = new Label();
-            recordingStatusLabel = new Label();
-            recordingIndicator = new Panel();
-            streamingStatusLabel = new Label();
-            streamingIndicator = new Panel();
-            fpsLabel = new Label();
-            policeInfoLabel = new Label();
             pnlPreview = new Panel();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             timeLabel = new ToolStripStatusLabel();
+            button1 = new Button();
             contextMenuStrip.SuspendLayout();
             toolPanel.SuspendLayout();
             buttonPanel.SuspendLayout();
             streamUrlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)policeLogo).BeginInit();
-            controlPanel.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -92,7 +75,7 @@ namespace screen_window
             titleLabel.ForeColor = Color.White;
             titleLabel.Location = new Point(0, 74);
             titleLabel.Name = "titleLabel";
-            titleLabel.Size = new Size(1050, 30);
+            titleLabel.Size = new Size(781, 30);
             titleLabel.TabIndex = 1;
             titleLabel.Text = "公安视频监控推流系统 - 专业版";
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -103,7 +86,7 @@ namespace screen_window
             warningLine.Dock = DockStyle.Top;
             warningLine.Location = new Point(0, 70);
             warningLine.Name = "warningLine";
-            warningLine.Size = new Size(1050, 4);
+            warningLine.Size = new Size(781, 4);
             warningLine.TabIndex = 2;
             // 
             // contextMenuStrip
@@ -142,14 +125,14 @@ namespace screen_window
             toolPanel.Location = new Point(0, 0);
             toolPanel.Name = "toolPanel";
             toolPanel.Padding = new Padding(20, 10, 20, 10);
-            toolPanel.Size = new Size(1050, 70);
+            toolPanel.Size = new Size(781, 70);
             toolPanel.TabIndex = 3;
             // 
             // policeLabel
             // 
             policeLabel.Font = new Font("微软雅黑", 10F, FontStyle.Bold, GraphicsUnit.Point);
             policeLabel.ForeColor = Color.White;
-            policeLabel.Location = new Point(70, 15);
+            policeLabel.Location = new Point(8, 15);
             policeLabel.Name = "policeLabel";
             policeLabel.Size = new Size(100, 35);
             policeLabel.TabIndex = 0;
@@ -160,28 +143,14 @@ namespace screen_window
             // 
             buttonPanel.AutoSize = true;
             buttonPanel.BackColor = Color.Transparent;
-            buttonPanel.Controls.Add(separator1);
-            buttonPanel.Controls.Add(btnSelectRegion);
-            buttonPanel.Controls.Add(separator2);
-            buttonPanel.Controls.Add(btnFullScreen);
-            buttonPanel.Controls.Add(separator3);
             buttonPanel.Controls.Add(streamUrlPanel);
-            buttonPanel.Controls.Add(separator4);
             buttonPanel.Controls.Add(btnToggleStream);
-            buttonPanel.Location = new Point(180, 5);
+            buttonPanel.Location = new Point(118, 5);
             buttonPanel.Name = "buttonPanel";
             buttonPanel.Padding = new Padding(5);
-            buttonPanel.Size = new Size(844, 61);
+            buttonPanel.Size = new Size(663, 61);
             buttonPanel.TabIndex = 1;
             buttonPanel.WrapContents = false;
-            // 
-            // separator1
-            // 
-            separator1.BackColor = Color.Transparent;
-            separator1.Location = new Point(8, 8);
-            separator1.Name = "separator1";
-            separator1.Size = new Size(15, 45);
-            separator1.TabIndex = 1;
             // 
             // btnSelectRegion
             // 
@@ -191,21 +160,13 @@ namespace screen_window
             btnSelectRegion.FlatStyle = FlatStyle.Flat;
             btnSelectRegion.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnSelectRegion.ForeColor = Color.White;
-            btnSelectRegion.Location = new Point(29, 8);
+            btnSelectRegion.Location = new Point(29, 7);
             btnSelectRegion.Name = "btnSelectRegion";
-            btnSelectRegion.Size = new Size(100, 45);
+            btnSelectRegion.Size = new Size(100, 27);
             btnSelectRegion.TabIndex = 1;
             btnSelectRegion.Text = "选择区域";
             btnSelectRegion.UseVisualStyleBackColor = false;
             btnSelectRegion.Click += btnSelectRegion_Click;
-            // 
-            // separator2
-            // 
-            separator2.BackColor = Color.Transparent;
-            separator2.Location = new Point(135, 8);
-            separator2.Name = "separator2";
-            separator2.Size = new Size(15, 45);
-            separator2.TabIndex = 2;
             // 
             // btnFullScreen
             // 
@@ -215,62 +176,24 @@ namespace screen_window
             btnFullScreen.FlatStyle = FlatStyle.Flat;
             btnFullScreen.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnFullScreen.ForeColor = Color.White;
-            btnFullScreen.Location = new Point(156, 8);
+            btnFullScreen.Location = new Point(135, 7);
             btnFullScreen.Name = "btnFullScreen";
-            btnFullScreen.Size = new Size(100, 45);
+            btnFullScreen.Size = new Size(100, 27);
             btnFullScreen.TabIndex = 2;
             btnFullScreen.Text = "全屏录制";
             btnFullScreen.UseVisualStyleBackColor = false;
             btnFullScreen.Click += btnFullScreen_Click;
             // 
-            // separator3
-            // 
-            separator3.BackColor = Color.Transparent;
-            separator3.Location = new Point(262, 8);
-            separator3.Name = "separator3";
-            separator3.Size = new Size(15, 45);
-            separator3.TabIndex = 3;
-            // 
             // streamUrlPanel
             // 
             streamUrlPanel.BackColor = Color.Transparent;
-            streamUrlPanel.Controls.Add(label1);
-            streamUrlPanel.Controls.Add(txtStreamUrl);
-            streamUrlPanel.Location = new Point(283, 8);
+            streamUrlPanel.Controls.Add(btnSelectRegion);
+            streamUrlPanel.Controls.Add(button1);
+            streamUrlPanel.Controls.Add(btnFullScreen);
+            streamUrlPanel.Location = new Point(8, 8);
             streamUrlPanel.Name = "streamUrlPanel";
-            streamUrlPanel.Size = new Size(280, 45);
+            streamUrlPanel.Size = new Size(431, 45);
             streamUrlPanel.TabIndex = 4;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(0, 10);
-            label1.Name = "label1";
-            label1.Size = new Size(68, 17);
-            label1.TabIndex = 3;
-            label1.Text = "推流地址：";
-            // 
-            // txtStreamUrl
-            // 
-            txtStreamUrl.BackColor = Color.White;
-            txtStreamUrl.BorderStyle = BorderStyle.FixedSingle;
-            txtStreamUrl.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtStreamUrl.ForeColor = Color.FromArgb(51, 51, 51);
-            txtStreamUrl.Location = new Point(70, 7);
-            txtStreamUrl.Name = "txtStreamUrl";
-            txtStreamUrl.Size = new Size(200, 23);
-            txtStreamUrl.TabIndex = 4;
-            txtStreamUrl.Text = "rtsp://localhost:8554/live/stream";
-            // 
-            // separator4
-            // 
-            separator4.BackColor = Color.Transparent;
-            separator4.Location = new Point(569, 8);
-            separator4.Name = "separator4";
-            separator4.Size = new Size(15, 45);
-            separator4.TabIndex = 5;
             // 
             // btnToggleStream
             // 
@@ -280,7 +203,7 @@ namespace screen_window
             btnToggleStream.FlatStyle = FlatStyle.Flat;
             btnToggleStream.Font = new Font("微软雅黑", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnToggleStream.ForeColor = Color.White;
-            btnToggleStream.Location = new Point(590, 8);
+            btnToggleStream.Location = new Point(445, 8);
             btnToggleStream.Name = "btnToggleStream";
             btnToggleStream.Size = new Size(100, 45);
             btnToggleStream.TabIndex = 5;
@@ -297,125 +220,23 @@ namespace screen_window
             policeLogo.TabIndex = 0;
             policeLogo.TabStop = false;
             // 
-            // controlPanel
-            // 
-            controlPanel.BackColor = Color.White;
-            controlPanel.BorderStyle = BorderStyle.FixedSingle;
-            controlPanel.Controls.Add(controlPanelTitle);
-            controlPanel.Controls.Add(statusLabel);
-            controlPanel.Controls.Add(recordingStatusLabel);
-            controlPanel.Controls.Add(recordingIndicator);
-            controlPanel.Controls.Add(streamingStatusLabel);
-            controlPanel.Controls.Add(streamingIndicator);
-            controlPanel.Controls.Add(fpsLabel);
-            controlPanel.Controls.Add(policeInfoLabel);
-            controlPanel.Location = new Point(20, 115);
-            controlPanel.Name = "controlPanel";
-            controlPanel.Size = new Size(220, 430);
-            controlPanel.TabIndex = 8;
-            // 
-            // controlPanelTitle
-            // 
-            controlPanelTitle.BackColor = Color.FromArgb(240, 242, 245);
-            controlPanelTitle.Dock = DockStyle.Top;
-            controlPanelTitle.Font = new Font("微软雅黑", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            controlPanelTitle.ForeColor = Color.FromArgb(51, 51, 51);
-            controlPanelTitle.Location = new Point(0, 0);
-            controlPanelTitle.Name = "controlPanelTitle";
-            controlPanelTitle.Padding = new Padding(10, 0, 0, 0);
-            controlPanelTitle.Size = new Size(218, 30);
-            controlPanelTitle.TabIndex = 0;
-            controlPanelTitle.Text = "系统状态";
-            controlPanelTitle.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // statusLabel
-            // 
-            statusLabel.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            statusLabel.ForeColor = Color.FromArgb(51, 51, 51);
-            statusLabel.Location = new Point(10, 40);
-            statusLabel.Name = "statusLabel";
-            statusLabel.Size = new Size(180, 20);
-            statusLabel.TabIndex = 1;
-            statusLabel.Text = "当前状态: 就绪";
-            // 
-            // recordingStatusLabel
-            // 
-            recordingStatusLabel.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            recordingStatusLabel.ForeColor = Color.FromArgb(51, 51, 51);
-            recordingStatusLabel.Location = new Point(10, 70);
-            recordingStatusLabel.Name = "recordingStatusLabel";
-            recordingStatusLabel.Size = new Size(100, 20);
-            recordingStatusLabel.TabIndex = 2;
-            recordingStatusLabel.Text = "录制状态:";
-            // 
-            // recordingIndicator
-            // 
-            recordingIndicator.BackColor = Color.Gray;
-            recordingIndicator.BorderStyle = BorderStyle.FixedSingle;
-            recordingIndicator.Location = new Point(110, 70);
-            recordingIndicator.Name = "recordingIndicator";
-            recordingIndicator.Size = new Size(12, 12);
-            recordingIndicator.TabIndex = 3;
-            recordingIndicator.Tag = "recordingIndicator";
-            // 
-            // streamingStatusLabel
-            // 
-            streamingStatusLabel.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            streamingStatusLabel.ForeColor = Color.FromArgb(51, 51, 51);
-            streamingStatusLabel.Location = new Point(10, 100);
-            streamingStatusLabel.Name = "streamingStatusLabel";
-            streamingStatusLabel.Size = new Size(100, 20);
-            streamingStatusLabel.TabIndex = 4;
-            streamingStatusLabel.Text = "推流状态:";
-            // 
-            // streamingIndicator
-            // 
-            streamingIndicator.BackColor = Color.Gray;
-            streamingIndicator.BorderStyle = BorderStyle.FixedSingle;
-            streamingIndicator.Location = new Point(110, 100);
-            streamingIndicator.Name = "streamingIndicator";
-            streamingIndicator.Size = new Size(12, 12);
-            streamingIndicator.TabIndex = 5;
-            streamingIndicator.Tag = "streamingIndicator";
-            // 
-            // fpsLabel
-            // 
-            fpsLabel.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            fpsLabel.ForeColor = Color.FromArgb(51, 51, 51);
-            fpsLabel.Location = new Point(10, 130);
-            fpsLabel.Name = "fpsLabel";
-            fpsLabel.Size = new Size(100, 20);
-            fpsLabel.TabIndex = 6;
-            fpsLabel.Text = "帧率: 0 FPS";
-            // 
-            // policeInfoLabel
-            // 
-            policeInfoLabel.AutoSize = true;
-            policeInfoLabel.Font = new Font("微软雅黑", 8.5F, FontStyle.Regular, GraphicsUnit.Point);
-            policeInfoLabel.ForeColor = Color.FromArgb(192, 57, 43);
-            policeInfoLabel.Location = new Point(10, 170);
-            policeInfoLabel.Name = "policeInfoLabel";
-            policeInfoLabel.Size = new Size(166, 102);
-            policeInfoLabel.TabIndex = 7;
-            policeInfoLabel.Text = "公安系统安全提示:\n\n1. 本系统仅用于合法执法活动\n2. 视频数据受法律保护\n3. 严禁未授权访问和传播\n4. 操作需符合警务规范";
-            // 
             // pnlPreview
             // 
             pnlPreview.BackColor = Color.Black;
             pnlPreview.BackgroundImageLayout = ImageLayout.Center;
             pnlPreview.BorderStyle = BorderStyle.FixedSingle;
-            pnlPreview.Location = new Point(250, 115);
+            pnlPreview.Location = new Point(0, 115);
             pnlPreview.Name = "pnlPreview";
-            pnlPreview.Size = new Size(780, 430);
+            pnlPreview.Size = new Size(770, 317);
             pnlPreview.TabIndex = 6;
             // 
             // statusStrip1
             // 
             statusStrip1.BackColor = Color.FromArgb(236, 240, 241);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, timeLabel });
-            statusStrip1.Location = new Point(0, 628);
+            statusStrip1.Location = new Point(0, 436);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1050, 22);
+            statusStrip1.Size = new Size(781, 22);
             statusStrip1.TabIndex = 7;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -430,22 +251,36 @@ namespace screen_window
             // 
             timeLabel.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
             timeLabel.Name = "timeLabel";
-            timeLabel.Size = new Size(1003, 17);
+            timeLabel.Size = new Size(734, 17);
             timeLabel.Spring = true;
             timeLabel.Text = "15:07:18";
             timeLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(192, 192, 0);
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(328, 7);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 27);
+            button1.TabIndex = 2;
+            button1.Text = "推流地址设置";
+            button1.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
-            ClientSize = new Size(1050, 650);
+            ClientSize = new Size(781, 458);
             Controls.Add(titleLabel);
             Controls.Add(warningLine);
             Controls.Add(toolPanel);
             Controls.Add(statusStrip1);
-            Controls.Add(controlPanel);
             Controls.Add(pnlPreview);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -458,10 +293,7 @@ namespace screen_window
             toolPanel.PerformLayout();
             buttonPanel.ResumeLayout(false);
             streamUrlPanel.ResumeLayout(false);
-            streamUrlPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)policeLogo).EndInit();
-            controlPanel.ResumeLayout(false);
-            controlPanel.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ResumeLayout(false);
@@ -511,22 +343,10 @@ namespace screen_window
         private Panel toolPanel;
         private Label policeLabel;
         private FlowLayoutPanel buttonPanel;
-        private Panel separator1;
-        private Panel separator2;
-        private Panel separator3;
         private Panel streamUrlPanel;
-        private Panel separator4;
         private PictureBox policeLogo;
-        private Panel controlPanel;
-        private Label controlPanelTitle;
-        private Label statusLabel;
-        private Label recordingStatusLabel;
-        private Panel recordingIndicator;
-        private Label streamingStatusLabel;
-        private Panel streamingIndicator;
-        private Label fpsLabel;
-        private Label policeInfoLabel;
         private ToolStripStatusLabel timeLabel;
+        private Button button1;
     }
 
         #endregion
