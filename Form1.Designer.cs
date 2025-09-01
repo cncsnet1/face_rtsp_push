@@ -49,16 +49,16 @@ namespace screen_window
             toolPanel = new Panel();
             policeLabel = new Label();
             buttonPanel = new FlowLayoutPanel();
-            btnSelectRegion = new Button();
-            btnFullScreen = new Button();
             streamUrlPanel = new Panel();
+            btnSelectRegion = new Button();
+            button1 = new Button();
+            btnFullScreen = new Button();
             btnToggleStream = new Button();
             policeLogo = new PictureBox();
             pnlPreview = new Panel();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             timeLabel = new ToolStripStatusLabel();
-            button1 = new Button();
             contextMenuStrip.SuspendLayout();
             toolPanel.SuspendLayout();
             buttonPanel.SuspendLayout();
@@ -152,6 +152,17 @@ namespace screen_window
             buttonPanel.TabIndex = 1;
             buttonPanel.WrapContents = false;
             // 
+            // streamUrlPanel
+            // 
+            streamUrlPanel.BackColor = Color.Transparent;
+            streamUrlPanel.Controls.Add(btnSelectRegion);
+            streamUrlPanel.Controls.Add(button1);
+            streamUrlPanel.Controls.Add(btnFullScreen);
+            streamUrlPanel.Location = new Point(8, 8);
+            streamUrlPanel.Name = "streamUrlPanel";
+            streamUrlPanel.Size = new Size(431, 45);
+            streamUrlPanel.TabIndex = 4;
+            // 
             // btnSelectRegion
             // 
             btnSelectRegion.BackColor = Color.FromArgb(52, 152, 219);
@@ -168,6 +179,21 @@ namespace screen_window
             btnSelectRegion.UseVisualStyleBackColor = false;
             btnSelectRegion.Click += btnSelectRegion_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(192, 192, 0);
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(328, 7);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 27);
+            button1.TabIndex = 2;
+            button1.Text = "推流地址设置";
+            button1.UseVisualStyleBackColor = false;
+            // 
             // btnFullScreen
             // 
             btnFullScreen.BackColor = Color.FromArgb(155, 89, 182);
@@ -183,17 +209,6 @@ namespace screen_window
             btnFullScreen.Text = "全屏录制";
             btnFullScreen.UseVisualStyleBackColor = false;
             btnFullScreen.Click += btnFullScreen_Click;
-            // 
-            // streamUrlPanel
-            // 
-            streamUrlPanel.BackColor = Color.Transparent;
-            streamUrlPanel.Controls.Add(btnSelectRegion);
-            streamUrlPanel.Controls.Add(button1);
-            streamUrlPanel.Controls.Add(btnFullScreen);
-            streamUrlPanel.Location = new Point(8, 8);
-            streamUrlPanel.Name = "streamUrlPanel";
-            streamUrlPanel.Size = new Size(431, 45);
-            streamUrlPanel.TabIndex = 4;
             // 
             // btnToggleStream
             // 
@@ -255,21 +270,6 @@ namespace screen_window
             timeLabel.Spring = true;
             timeLabel.Text = "15:07:18";
             timeLabel.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(192, 192, 0);
-            button1.Cursor = Cursors.Hand;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(328, 7);
-            button1.Name = "button1";
-            button1.Size = new Size(100, 27);
-            button1.TabIndex = 2;
-            button1.Text = "推流地址设置";
-            button1.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 

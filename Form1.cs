@@ -37,6 +37,8 @@ namespace screen_window
         private const int FRAME_INTERVAL_MS = 1000 / TARGET_FPS; // 帧间隔
         private bool useAlternativeRtsp = false; // 是否使用备用RTSP方案
         private int reconnectAttempts = 0; // 当前重连次数
+        private AppConfig appConfig; // 应用配置
+        private string txtStreamUrl = ""; // 推流地址
 
         public Form1()
         {
@@ -56,8 +58,32 @@ namespace screen_window
             // 初始化图标
             normalIcon = SystemIcons.Shield;
             recordingIcon = CreateRecordingIcon();
+            
+            // 加载配置
+            LoadConfig();
+            
+            // 绑定推流地址设置按钮事件
+            button1.Click += button1_Click;
+            
             ManageCrimAlertProcess();
 
+        }
+
+        private void LoadConfig()
+        {
+            appConfig = ConfigManager.LoadConfig();
+            txtStreamUrl = appConfig.StreamUrl;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 打开推流地址设置窗口
+            Form2 configForm = new Form2();
+            if (configForm.ShowDialog() == DialogResult.OK)
+            {
+                // 重新加载配置
+                LoadConfig();
+            }
         }
         private void ManageCrimAlertProcess()
         {
@@ -262,7 +288,7 @@ namespace screen_window
 
         private void StartStreaming()
         {
-            if (string.IsNullOrEmpty(txtStreamUrl.Text))
+            if (string.IsNullOrEmpty(txtStreamUrl))
             {
                 MessageBox.Show("请输入推流地址");
                 return;
@@ -331,7 +357,7 @@ namespace screen_window
                 Process? ffmpegProcess = null;
                 try
                 {
-                    string streamUrl = txtStreamUrl.Text;
+                    string streamUrl = txtStreamUrl;
                     if (string.IsNullOrEmpty(streamUrl))
                     {
                         this.Invoke((System.Windows.Forms.MethodInvoker)delegate
